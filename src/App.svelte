@@ -1,7 +1,20 @@
 <script lang="ts">
-  import './lib/Counter.svelte';
+  import './lib/Modal.svelte';
 </script>
 
 <main>
-  <my-counter />
+  <modal-wc show={true}>
+    <div>This is content</div>
+    <footer slot="footer">footer</footer>
+  </modal-wc>
 </main>
+
+<style>
+  div {
+    padding: 15px;
+  }
+
+  footer {
+    padding: 15px;
+  }
+</style>

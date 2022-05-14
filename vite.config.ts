@@ -5,13 +5,13 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 export default defineConfig({
   build: {
     lib: {
-      entry: './src/lib/Counter.svelte',
+      entry: './src/lib/Modal.svelte',
       name: 'ModalWC',
     },
   },
   plugins: [
     svelte({
-      exclude: ['./src/lib/Counter.svelte'],
+      exclude: ['./src/lib/Modal.svelte'],
     }),
     svelte({
       exclude: ['./src/App.svelte'],
