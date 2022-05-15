@@ -1,21 +1,17 @@
 <script lang="ts">
-  import './lib/Modal.svelte';
+  import "./lib/Modal.svelte";
 
   let modalRef;
 
   function onOpen() {
     modalRef.setShow(true);
   }
-
-  function onChange(e) {
-    console.log(e);
-  }
 </script>
 
 <main>
   <button on:click={onOpen}>Open Modal</button>
 
-  <modal-wc bind:this={modalRef} on:change={onChange}>
+  <modal-wc bind:this={modalRef}>
     <div>This is content</div>
     <footer slot="footer">footer</footer>
   </modal-wc>

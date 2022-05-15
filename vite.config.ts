@@ -1,20 +1,20 @@
-import { defineConfig } from 'vite';
-import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { defineConfig } from "vite";
+import { svelte } from "@sveltejs/vite-plugin-svelte";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
     lib: {
-      entry: './src/lib/Modal.svelte',
-      name: 'ModalWC',
+      entry: "./src/lib/Modal.svelte",
+      name: "ModalWC",
     },
   },
   plugins: [
     svelte({
-      exclude: ['./src/lib/Modal.svelte'],
+      exclude: ["./src/lib/Modal.svelte"],
     }),
     svelte({
-      exclude: ['./src/App.svelte'],
+      exclude: ["./src/Example.svelte"],
       compilerOptions: {
         customElement: true,
       },
