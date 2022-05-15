@@ -2,17 +2,52 @@
 
 <script lang="ts">
   export let title: string = 'Title';
-  export let show: boolean = false;
+  export let outsideClose: boolean = true;
 
-  function onClose() {
+  let show: boolean = false;
+  let modalRef: HTMLDivElement;
+
+  function close() {
     show = false;
+  }
+
+  function open() {
+    show = true;
+  }
+
+  function emitShowing(show: boolean) {
+    modalRef.dispatchEvent(
+      new CustomEvent('change', { detail: { show }, composed: true })
+    );
+  }
+
+  function onClose(e: Event) {
+    e.stopPropagation();
+    setShow(false);
+  }
+
+  function onBackdropClick() {
+    if (outsideClose) {
+      setShow(false);
+    }
+  }
+
+  export function setShow(show: boolean) {
+    emitShowing(show);
+    show ? open() : close();
   }
 </script>
 
-<div class="backdrop" style="display: {show ? 'flex' : 'none'}">
-  <div class="modal">
+<div
+  class="backdrop"
+  style="display: {show ? 'flex' : 'none'}"
+  on:click={onBackdropClick}
+>
+  <div bind:this={modalRef} class="modal">
     <slot name="header">
-      <header>{title} <span on:click={onClose}>&#x2715</span></header>
+      <header>
+        {title} <span on:click={onClose}>&#x2715</span>
+      </header>
     </slot>
     <slot />
     <slot name="footer" />
@@ -28,7 +63,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #a0a5a1;
+    background-color: #a0a5a175;
     z-index: 1000;
   }
 
