@@ -1,8 +1,9 @@
 <svelte:options tag="modal-wc" />
 
 <script lang="ts">
-  export let title: string = "Title";
-  export let outsideClose: boolean = true;
+  export let title: string = 'Title';
+  export let outsideclose: boolean = true;
+  export let closeonesc: boolean = true;
 
   let show: boolean = false;
   let modalRef: HTMLDivElement;
@@ -17,7 +18,7 @@
 
   function emitShowing(show: boolean) {
     modalRef.dispatchEvent(
-      new CustomEvent("change", { detail: { show }, composed: true })
+      new CustomEvent('change', { detail: { show }, composed: true })
     );
   }
 
@@ -27,7 +28,13 @@
   }
 
   function onBackdropClick() {
-    if (outsideClose) {
+    if (outsideclose) {
+      setShow(false);
+    }
+  }
+
+  function onKeydown(e: KeyboardEvent) {
+    if (e.key === 'Escape' && show && closeonesc) {
       setShow(false);
     }
   }
@@ -37,6 +44,8 @@
     show ? open() : close();
   }
 </script>
+
+<svelte:window on:keydown={onKeydown} />
 
 <div class="modal-container" style="display: {show ? 'flex' : 'none'}">
   <div class="backdrop" on:click={onBackdropClick} />

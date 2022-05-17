@@ -1,5 +1,5 @@
 <script lang="ts">
-  import "./lib/Modal.svelte";
+  import './lib/Modal.svelte';
 
   let modalRef;
 
@@ -11,7 +11,7 @@
 <main>
   <button on:click={onOpen}>Open Modal</button>
 
-  <modal-wc bind:this={modalRef}>
+  <modal-wc bind:this={modalRef} outsideclose={false} closeonesc={true}>
     <div>This is content</div>
     <footer slot="footer">footer</footer>
   </modal-wc>
